@@ -1,0 +1,7 @@
+.env
+.vs
+node_modules/
+*.sqlite
+package-lock.json
+log
+*.code-workspace
