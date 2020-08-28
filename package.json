@@ -1,0 +1,19 @@
+{
+  "name": "pandabot",
+  "version": "1.0.0",
+  "description": "A Discord bot for RedPandaMon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akashic101/PandaBot.git"
+  },
+  "author": "Akashic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akashic101/PandaBot/issues"
+  },
+  "homepage": "https://github.com/Akashic101/PandaBot#readme"
+}
