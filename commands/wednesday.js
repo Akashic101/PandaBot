@@ -1,0 +1,16 @@
+var pjson = require('../package.json');
+const Discord = require('discord.js');
+
+module.exports = {
+    name: 'wednesday',
+    description: 'Sends a Wednesday-meme',
+    execute(client, message, args) {
+        const wednesdayEmbed = new Discord.MessageEmbed()
+        .setColor('#E1CFB4')
+        .setTitle(`**It's Wednesday my dudes**`)
+        .setImage(args[0])
+        .setTimestamp()
+        .setFooter(`${process.env.BOT_NAME} V ${pjson.version}`, process.env.BOT_PFP);
+        client.channels.cache.get('748883636152958997').send(wednesdayEmbed);
+    },
+};
