@@ -192,7 +192,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                         .setTitle('**Member agreed to rules**')
                         .setDescription(`**${member.user.tag}** agreed to the rules at ` + d + ". He is in the server since " + Math.round((d - member.joinedAt) / 1000) + " seconds")
                         .setColor("7F0000")
-                        .setThumbnail(reaction.message.member.user.avatarURL())
+                        .setThumbnail(member.user.avatarURL())
                         .setTimestamp()
                         .setFooter(`${process.env.BOT_NAME} V${pjson.version}`, process.env.BOT_PFP);
                     return client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(readyEmbed);
