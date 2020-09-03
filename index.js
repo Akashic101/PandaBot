@@ -120,11 +120,6 @@ client.on("messageReactionAdd", async (reaction, user) => {
             reportEmbed.addField('Link', `https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`, true)
             client.channels.cache.get(process.env.OFFICE).send(reportEmbed);
             break;
-        case '1️⃣':
-            reportEmbed.addField('Rule', reaction.emoji.name, true)
-            reportEmbed.addField('Link', `https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`, true)
-            client.channels.cache.get(process.env.OFFICE).send(reportEmbed);
-            break;
         case '2️⃣':
             reportEmbed.addField('Rule', reaction.emoji.name, true)
             reportEmbed.addField('Link', `https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`, true)
@@ -152,21 +147,21 @@ client.on("messageReactionAdd", async (reaction, user) => {
             case '🌿':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        member.roles.add('750027586695987331').catch(console.error)
+                        member.roles.add('751104080914677891').catch(console.error)
 
                     })
                 break;
             case '🌵':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        member.roles.add('750027631050883092').catch(console.error)
+                        member.roles.add('751104348981035109').catch(console.error)
 
                     })
                 break;
             case '🌱':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        member.roles.add('750027667142738060').catch(console.error)
+                        member.roles.add('751104393356771408').catch(console.error)
 
                     })
                 break;
@@ -178,25 +173,25 @@ client.on("messageReactionAdd", async (reaction, user) => {
             case '📽️':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        return member.roles.add('750799326288019587').catch(console.error)
+                        return member.roles.add('751105438602231859').catch(console.error)
                     })
                 break;
             case '🍩':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        return member.roles.add('738843360969621554').catch(console.error)
+                        return member.roles.add('751105739187028081').catch(console.error)
                     })
                 break;
             case '😺':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        return member.roles.add('704397923261087879').catch(console.error)
+                        return member.roles.add('751105762641576096').catch(console.error)
                     })
                 break;
             case '🟩':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        return member.roles.add('726112836601905192').catch(console.error)
+                        return member.roles.add('751105714700943420').catch(console.error)
                     })
                 break;
         }
