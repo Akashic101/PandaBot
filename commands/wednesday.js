@@ -11,6 +11,6 @@ module.exports = {
         .setImage(args[0])
         .setTimestamp()
         .setFooter(`${process.env.BOT_NAME} V ${pjson.version}`, process.env.BOT_PFP);
-        client.channels.cache.get('748883636152958997').send(wednesdayEmbed);
+        client.channels.cache.get('521894550680109083').send(wednesdayEmbed);
     },
 };
