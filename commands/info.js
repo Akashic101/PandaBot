@@ -33,11 +33,11 @@ module.exports = {
         fs.readdir('./commands', (err, files) => {
             let infoEmbed = new Discord.MessageEmbed()
                 .setTitle('info')
-                .setURL('https://github.com/Akashic101/SweetyPi')
+                .setURL('https://github.com/Akashic101/PandaBot')
                 .setColor('RANDOM')
                 .addFields({
                     name: 'Creator',
-                    value: pjson.author,
+                    value: `<@320574128568401920>`,
                     inline: true
                 }, {
                     name: 'Version',
