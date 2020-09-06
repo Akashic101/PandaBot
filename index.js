@@ -39,7 +39,6 @@ client.once('ready', () => {
     fs.readdir('./commands', (err, files) => {
         console.log(`${process.env.BOT_NAME} is online with version ${pjson.version} and ${files.length} commands`);
     });
-
 });
 
 client.on('guildMemberAdd', (member) => {
@@ -88,6 +87,71 @@ client.on('guildMemberRemove', (member) => {
         .setFooter(`${process.env.BOT_NAME} V ${pjson.version}`, process.env.BOT_PFP);
     client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(memberLeftEmbed);
 });
+
+client.on("messageReactionRemove", async (reaction, user) => {
+    if (reaction.message.id = rules_message) {
+        if (reaction.emoji.name == '✅')
+            reaction.message.guild.members.fetch(user)
+            .then((member) => {
+                member.roles.remove('751101775859417199').catch(console.error)
+            })
+    }
+
+    if (reaction.message.id = pronoun_message) {
+        switch (reaction.emoji.name) {
+            case '🌿':
+                reaction.message.guild.members.fetch(user)
+                    .then((member) => {
+                        member.roles.remove('751104080914677891').catch(console.error)
+                        member.setNickname(`${member.user.username}`)
+                    })
+                break;
+            case '🌵':
+                reaction.message.guild.members.fetch(user)
+                    .then((member) => {
+                        member.roles.remove('751104348981035109').catch(console.error)
+                        member.setNickname(`${member.user.username}`)
+                    })
+                break;
+            case '🌱':
+                reaction.message.guild.members.fetch(user)
+                    .then((member) => {
+                        member.roles.remove('751104393356771408').catch(console.error)
+                        member.setNickname(`${member.user.username}`)
+                    })
+                break;
+        }
+    }
+
+    if (reaction.message.id = channel_message) {
+        switch (reaction.emoji.name) {
+            case '📽️':
+                reaction.message.guild.members.fetch(user)
+                    .then((member) => {
+                        return member.roles.remove('751105438602231859').catch(console.error)
+                    })
+                break;
+            case '🍩':
+                reaction.message.guild.members.fetch(user)
+                    .then((member) => {
+                        return member.roles.remove('751105739187028081').catch(console.error)
+                    })
+                break;
+            case '😺':
+                reaction.message.guild.members.fetch(user)
+                    .then((member) => {
+                        return member.roles.remove('751105762641576096').catch(console.error)
+                    })
+                break;
+            case '🟩':
+                reaction.message.guild.members.fetch(user)
+                    .then((member) => {
+                        return member.roles.remove('751105714700943420').catch(console.error)
+                    })
+                break;
+        }
+    }
+})
 
 client.on("messageReactionAdd", async (reaction, user) => {
 
@@ -148,21 +212,21 @@ client.on("messageReactionAdd", async (reaction, user) => {
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
                         member.roles.add('751104080914677891').catch(console.error)
-
+                        member.setNickname(`(he/him) ${member.user.username}`)
                     })
                 break;
             case '🌵':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
                         member.roles.add('751104348981035109').catch(console.error)
-
+                        member.setNickname(`(she/her) ${member.user.username}`)
                     })
                 break;
             case '🌱':
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
                         member.roles.add('751104393356771408').catch(console.error)
-
+                        member.setNickname(`(they/them) ${member.user.username}`)
                     })
                 break;
         }
