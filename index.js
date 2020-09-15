@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 var pjson = require('./package.json');
+var cron = require('node-cron');
 const {
     format
 } = require('path');
@@ -93,7 +94,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
         if (reaction.emoji.name == '✅')
             reaction.message.guild.members.fetch(user)
             .then((member) => {
-                member.roles.remove('751101775859417199').catch(console.error)
+                member.roles.remove('720763494139428994').catch(console.error)
             })
     }
 
@@ -264,7 +265,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         if (reaction.emoji.name == '✅')
             reaction.message.guild.members.fetch(user)
             .then((member) => {
-                member.roles.add('751101775859417199').catch(console.error).then(() => {
+                member.roles.add('720763494139428994').catch(console.error).then(() => {
 
                     var d = new Date();
 
