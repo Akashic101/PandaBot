@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'wednesday',
     description: 'Sends a Wednesday-meme',
+    color: '#D9C9A8',
     execute(client, message, args) {
         const wednesdayEmbed = new Discord.MessageEmbed()
         .setColor('#E1CFB4')
