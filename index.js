@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 var pjson = require('./package.json');
-var cron = require('node-cron');
 const {
     format
 } = require('path');
@@ -27,6 +26,7 @@ const prefix = '!';
 client.login(token)
 
 client.once('ready', () => {
+
     client.channels.cache.get(roles_channel).messages.fetch(pronoun_message).then(m => {
         console.log("Cached pronoun message.");
     })
@@ -90,67 +90,69 @@ client.on('guildMemberRemove', (member) => {
 });
 
 client.on("messageReactionRemove", async (reaction, user) => {
-    if (reaction.message.id = rules_message) {
-        if (reaction.emoji.name == '✅')
-            reaction.message.guild.members.fetch(user)
-            .then((member) => {
-                member.roles.remove('720763494139428994').catch(console.error)
-            })
-    }
 
-    if (reaction.message.id = pronoun_message) {
-        switch (reaction.emoji.name) {
-            case '🌿':
+    switch (reaction.message.id) {
+        case rules_message:
+            if (reaction.emoji.name == '✅') {
                 reaction.message.guild.members.fetch(user)
                     .then((member) => {
-                        member.roles.remove('751104080914677891').catch(console.error)
-                        member.setNickname(`${member.user.username}`)
+                        member.roles.remove('720763494139428994').catch(console.error)
                     })
-                break;
-            case '🌵':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        member.roles.remove('751104348981035109').catch(console.error)
-                        member.setNickname(`${member.user.username}`)
-                    })
-                break;
-            case '🌱':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        member.roles.remove('751104393356771408').catch(console.error)
-                        member.setNickname(`${member.user.username}`)
-                    })
-                break;
-        }
-    }
-
-    if (reaction.message.id = channel_message) {
-        switch (reaction.emoji.name) {
-            case '📽️':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.remove('751105438602231859').catch(console.error)
-                    })
-                break;
-            case '🍩':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.remove('751105739187028081').catch(console.error)
-                    })
-                break;
-            case '😺':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.remove('751105762641576096').catch(console.error)
-                    })
-                break;
-            case '🟩':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.remove('751105714700943420').catch(console.error)
-                    })
-                break;
-        }
+            }
+            break;
+        case pronoun_message:
+            switch (reaction.emoji.name) {
+                case '🌿':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            member.roles.remove('751104080914677891').catch(console.error)
+                            member.setNickname(`${member.user.username}`)
+                        })
+                    break;
+                case '🌵':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            member.roles.remove('751104348981035109').catch(console.error)
+                            member.setNickname(`${member.user.username}`)
+                        })
+                    break;
+                case '🌱':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            member.roles.remove('751104393356771408').catch(console.error)
+                            member.setNickname(`${member.user.username}`)
+                        })
+                    break;
+            }
+            break;
+        case channel_message:
+            switch (reaction.emoji.name) {
+                case '📽️':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.remove('751105438602231859').catch(console.error)
+                        })
+                    break;
+                case '🍩':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.remove('751105739187028081').catch(console.error)
+                        })
+                    break;
+                case '😺':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.remove('751105762641576096').catch(console.error)
+                        })
+                    break;
+                case '🟩':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.remove('751105714700943420').catch(console.error)
+                        })
+                    break;
+            }
+            break;
     }
 })
 
@@ -207,78 +209,85 @@ client.on("messageReactionAdd", async (reaction, user) => {
             break;
     }
 
-    if (reaction.message.id = pronoun_message) {
-        switch (reaction.emoji.name) {
-            case '🌿':
+    switch (reaction.message.id) {
+        case pronoun_message:
+            switch (reaction.emoji.name) {
+                case '🌿':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            member.roles.add('751104080914677891').catch(console.error)
+                            member.setNickname(`(he/him) ${member.user.username}`)
+                        })
+                    break;
+                case '🌵':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            member.roles.add('751104348981035109').catch(console.error)
+                            member.setNickname(`(she/her) ${member.user.username}`)
+                        })
+                    break;
+                case '🌱':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            member.roles.add('751104393356771408').catch(console.error)
+                            member.setNickname(`(they/them) ${member.user.username}`)
+                        })
+                    break;
+            }
+            break;
+        case channel_message:
+            switch (reaction.emoji.name) {
+                case '📽️':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.add('751105438602231859').catch(console.error)
+                        })
+                    break;
+                case '🍩':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.add('751105739187028081').catch(console.error)
+                        })
+                    break;
+                case '😺':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.add('751105762641576096').catch(console.error)
+                        })
+                    break;
+                case '🟩':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.add('751105714700943420').catch(console.error)
+                        })
+                    break;
+                case '🔪':
+                    reaction.message.guild.members.fetch(user)
+                        .then((member) => {
+                            return member.roles.add('760899033131778159').catch(console.error)
+                        })
+                    break;
+            }
+            break;
+        case rules_message:
+            if (reaction.emoji.name == '✅')
                 reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        member.roles.add('751104080914677891').catch(console.error)
-                        member.setNickname(`(he/him) ${member.user.username}`)
-                    })
-                break;
-            case '🌵':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        member.roles.add('751104348981035109').catch(console.error)
-                        member.setNickname(`(she/her) ${member.user.username}`)
-                    })
-                break;
-            case '🌱':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        member.roles.add('751104393356771408').catch(console.error)
-                        member.setNickname(`(they/them) ${member.user.username}`)
-                    })
-                break;
-        }
-    }
+                .then((member) => {
+                    member.roles.add('720763494139428994').catch(console.error).then(() => {
 
-    if (reaction.message.id = channel_message) {
-        switch (reaction.emoji.name) {
-            case '📽️':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.add('751105438602231859').catch(console.error)
-                    })
-                break;
-            case '🍩':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.add('751105739187028081').catch(console.error)
-                    })
-                break;
-            case '😺':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.add('751105762641576096').catch(console.error)
-                    })
-                break;
-            case '🟩':
-                reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        return member.roles.add('751105714700943420').catch(console.error)
-                    })
-                break;
-        }
-    }
-    if (reaction.message.id = rules_message) {
-        if (reaction.emoji.name == '✅')
-            reaction.message.guild.members.fetch(user)
-            .then((member) => {
-                member.roles.add('720763494139428994').catch(console.error).then(() => {
+                        var d = new Date();
 
-                    var d = new Date();
-
-                    let readyEmbed = new Discord.MessageEmbed()
-                        .setTitle('**Member agreed to rules**')
-                        .setDescription(`**${member.user.tag}** agreed to the rules at ` + d + ". He is in the server since " + Math.round((d - member.joinedAt) / 1000) + " seconds")
-                        .setColor("7F0000")
-                        .setThumbnail(member.user.avatarURL())
-                        .setTimestamp()
-                        .setFooter(`${process.env.BOT_NAME} V${pjson.version}`, process.env.BOT_PFP);
-                    return client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(readyEmbed);
+                        let readyEmbed = new Discord.MessageEmbed()
+                            .setTitle('**Member agreed to rules**')
+                            .setDescription(`**${member.user.tag}** agreed to the rules at ` + d + ". He is in the server since " + Math.round((d - member.joinedAt) / 1000) + " seconds")
+                            .setColor("7F0000")
+                            .setThumbnail(member.user.avatarURL())
+                            .setTimestamp()
+                            .setFooter(`${process.env.BOT_NAME} V${pjson.version}`, process.env.BOT_PFP);
+                        return client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(readyEmbed);
+                    })
                 })
-            })
+            break;
     }
 })
 
@@ -323,14 +332,72 @@ client.on('messageDelete', async message => {
 client.on('message', async message => {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const command = args.shift().toLowerCase();
+    const commandName = args.shift().toLowerCase();
 
-    if (!message.content.startsWith(prefix) || message.author.bot || message.author.self || !client.commands.has(command)) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || message.author.self || !client.commands.has(commandName)) return;
 
-    try {
-        client.commands.get(command).execute(client, message, args);
-    } catch (error) {
-        console.error(error);
-        message.reply('there was an error trying to execute that command!');
+    const command = client.commands.get(commandName);
+
+    if (command.modOnly) {
+        if (!message.member.roles.cache.some((role) => role.name == '🟢 Moderator')) {
+            return message.reply("This command is only available for moderators. You do not have the permissions to use it")
+        }
     }
-})
+
+    if (command.args && !args.length) {
+        return message.reply(`You didn't provide any arguments!`);
+    }
+
+    if (command.channel) {
+        for (let i = 0; i < command.channel.length; i++) {
+            if (message.channel.name == command.channel[i]) {
+                try {
+                    sendLog(command, message);
+                    return command.execute(client, message, args);
+                } catch (error) {
+                    console.error(error);
+                    message.reply('there was an error trying to execute that command!');
+                }
+            }
+        }
+        var availableChannels = `<#${message.guild.channels.cache.find(channel => channel.name == command.channel[0]).id}>`;
+        for (let i = 1; i < command.channel.length; i++) {
+            if (command.channel[i] == 'bottesting') continue;
+            var availableChannels = availableChannels.concat(` or <#${message.guild.channels.cache.find(channel => channel.name == command.channel[i]).id}>`)
+        }
+        return message.reply(`The command will not work here. \n It will work in ${availableChannels}`);
+    } else {
+        sendLog(command, message);
+        try {
+            return command.execute(client, message, args);
+        } catch (error) {
+            console.error(error);
+            message.reply('there was an error trying to execute that command!');
+        }
+    }
+});
+
+function sendLog(command, message) {
+    var serverLogEmbed = new Discord.MessageEmbed()
+        .setTitle(`**${command.name}**`)
+        .setColor(command.color)
+        .setDescription(command.description)
+        .addFields({
+            name: 'Username',
+            value: message.member.user.tag
+        }, {
+            name: 'Command',
+            value: message.content
+        }, {
+            name: 'Date',
+            value: date = new Date()
+        })
+        .setThumbnail(message.member.user.displayAvatarURL({
+            format: 'jpg'
+        }))
+        .setTimestamp()
+        .setFooter(process.env.BOT_NAME + ' V' + pjson.version, process.env.PROFILE_PICTURE);
+
+    var channel = message.client.channels.cache.get(process.env.SERVER_LOG_CHANNEL);
+    channel.send(serverLogEmbed);
+}
