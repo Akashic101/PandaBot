@@ -182,6 +182,11 @@ client.on("messageReactionAdd", async (reaction, user) => {
         .setFooter(`${process.env.BOT_NAME} V${pjson.version}`, process.env.BOT_PFP);
 
     switch (reaction.emoji.name) {
+        case '0️⃣':
+            reportEmbed.addField('Rule', reaction.emoji.name, true)
+            reportEmbed.addField('Link', `https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`, true)
+            client.channels.cache.get(process.env.OFFICE).send(reportEmbed);
+            break;
         case '1️⃣':
             reportEmbed.addField('Rule', reaction.emoji.name, true)
             reportEmbed.addField('Link', `https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`, true)
