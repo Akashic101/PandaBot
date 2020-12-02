@@ -388,15 +388,22 @@ function sendLog(command, message) {
         .setColor(command.color)
         .setDescription(command.description)
         .addFields({
-            name: 'Username',
-            value: message.member.user.tag
-        }, {
-            name: 'Command',
-            value: message.content
-        }, {
-            name: 'Date',
-            value: date = new Date()
-        })
+			name: `Username`,
+			value: message.member.user.tag
+		}, {
+			name: `Command`,
+			value: message.content
+		}, {
+			name: `channel`,
+			value: `<#${message.channel.id}>`
+		}, {
+			name: `Date`,
+			value: `${d.getDate()}.${d.getMonth()}.${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+		}, {
+			name: `link`,
+			value: `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`
+		}
+		)
         .setThumbnail(message.member.user.displayAvatarURL({
             format: 'jpg'
         }))
