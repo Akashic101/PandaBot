@@ -1,6 +1,6 @@
 {
   "name": "pandabot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Discord bot for RedPandaMon",
   "main": "index.js",
   "scripts": {
