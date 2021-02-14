@@ -30,6 +30,5 @@ module.exports = async (client, member) => {
     client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(memberJoinedEmbed);
 
     var item = lines[Math.floor(Math.random() * lines.length)];
-    
-    client.channels.cache.get("758341976369397761").send(`Hey <@${member.user.id}>. Welcome to The Cupboard! Please read and agree to the <#750797155928899636> in order to post in our server! Feel free to tell us a bit about yourself in <#758341976369397761>? ${item}`);
+    return client.channels.cache.get("758341976369397761").send(`Hey <@${member.user.id}>. Welcome to The Cupboard! Please read and agree to the <#750797155928899636> in order to post in our server! Feel free to tell us a bit about yourself in <#758341976369397761>? ${item}`);
 };
