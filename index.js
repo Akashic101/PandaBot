@@ -23,7 +23,7 @@ const files = requireAll({
 for (const name in files) {
     const event = files[name];
     client.on(name, event.bind(null, client));
-    
+
     const channel_message = '750840764640002058';
     const rules_message = '750835131995914331';
     const pronoun_message = '750836581757091900';
@@ -238,44 +238,45 @@ for (const name in files) {
                 break;
         }
     })
-
-    client.on('messageDelete', async message => {
-
-        if (!message.guild) return;
-        const fetchedLogs = await message.guild.fetchAuditLogs({
-            limit: 1,
-            type: 'MESSAGE_DELETE',
-        });
-
-        const deletionLog = fetchedLogs.entries.first();
-
-        if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
-
-        const {
-            executor,
-            target
-        } = deletionLog;
-
-        const messageDeletedEmbed = new Discord.MessageEmbed()
-            .setTitle('**Deleted message**')
-            .setColor("#c3032b")
-            .setTimestamp()
-            .setFooter(`${process.env.BOT_NAME} V ${pjson.version}`, process.env.BOT_PFP);
-
-        if (target.id === message.author.id) {
-            messageDeletedEmbed.setDescription(`A message by **${message.author.tag}** was deleted by **${executor.tag}**.`)
-            messageDeletedEmbed.setThumbnail(message.author.displayAvatarURL({
-                format: 'jpg'
-            }))
-        } else {
-            messageDeletedEmbed.setDescription(`A message by **${message.author.tag}** was deleted, but I don't know by who`);
-            messageDeletedEmbed.setThumbnail(message.author.displayAvatarURL({
-                format: 'jpg'
-            }))
-        }
-        client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(messageDeletedEmbed);
-    });
 }
+
+client.on('messageDelete', async message => {
+
+    if (!message.guild) return;
+    const fetchedLogs = await message.guild.fetchAuditLogs({
+        limit: 1,
+        type: 'MESSAGE_DELETE',
+    });
+
+    const deletionLog = fetchedLogs.entries.first();
+
+    if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
+
+    const {
+        executor,
+        target
+    } = deletionLog;
+
+    const messageDeletedEmbed = new Discord.MessageEmbed()
+        .setTitle('**Deleted message**')
+        .setColor("#c3032b")
+        .setTimestamp()
+        .setFooter(`${process.env.BOT_NAME} V ${pjson.version}`, process.env.BOT_PFP);
+
+    if (target.id === message.author.id) {
+        messageDeletedEmbed.setDescription(`A message by **${message.author.tag}** was deleted by **${executor.tag}**.`)
+        messageDeletedEmbed.setThumbnail(message.author.displayAvatarURL({
+            format: 'jpg'
+        }))
+    } else {
+        messageDeletedEmbed.setDescription(`A message by **${message.author.tag}** was deleted, but I don't know by who`);
+        messageDeletedEmbed.setThumbnail(message.author.displayAvatarURL({
+            format: 'jpg'
+        }))
+    }
+    return client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(messageDeletedEmbed);
+});
+
 
 function sendLog(command, message) {
 
