@@ -23,7 +23,7 @@ const files = requireAll({
 for (const name in files) {
     const event = files[name];
     client.on(name, event.bind(null, client));
-
+}
     const channel_message = '750840764640002058';
     const rules_message = '750835131995914331';
     const pronoun_message = '750836581757091900';
@@ -238,7 +238,7 @@ for (const name in files) {
                 break;
         }
     })
-}
+
 
 client.on('messageDelete', async message => {
 
