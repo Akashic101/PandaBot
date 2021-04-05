@@ -1,20 +1,121 @@
-const fs = require('fs');
+const Sequelize = require(`sequelize`);
 const Discord = require(`discord.js`);
 const pjson = require('../package.json');
 
 module.exports = async (client, message) => {
+
+    const serverDB = new Sequelize(`database`, `user`, `password`, {
+		host: `localhost`,
+		dialect: `sqlite`,
+		logging: false,
+		// SQLite only
+		storage: `serverDB.sqlite`,
+		timestamps: false,
+	});
+
+    const messages = serverDB.define(`messages`, {
+		id: {
+			primaryKey: true,
+			type: Sequelize.INTEGER,
+			unique: true,
+		},
+		user_id: {
+			type: Sequelize.STRING,
+			unique: true,
+		},
+		username: {
+			type: Sequelize.STRING,
+			unique: true,
+		},
+		messages: {
+			type: Sequelize.INTEGER,
+			defaultValue: 1,
+			allowNull: false,
+		}
+	});
+
+    const channels = serverDB.define(`channels`, {
+		id: {
+			primaryKey: true,
+			type: Sequelize.INTEGER,
+			unique: true,
+		},
+		channel_id: {
+			type: Sequelize.STRING,
+			unique: true,
+		},
+		channel_name: {
+			type: Sequelize.STRING,
+			unique: true,
+		},
+		messages: {
+			type: Sequelize.INTEGER,
+			defaultValue: 1,
+			allowNull: false,
+		},
+	});
+
+    messages.sync();
+    channels.sync();
 
     const prefix = '!';
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
+    if(!message.author.bot || message.author.self) {
+        try {
+            var channelMatch = await channels.findOne({
+                where: {
+                    channel_id: message.channel.id
+                }
+            })
+
+            if (channelMatch) {
+                channelMatch.increment(`messages`, {
+                    by: 1
+                })
+            }
+
+            else {
+                var channelMatch = await channels.create({
+                    channel_id: message.channel.id,
+                    channel_name: message.channel.name
+                })
+            }
+
+            //--------------------------
+
+            var memberMatch = await messages.findOne({
+                where: {
+                    user_id: message.author.id
+                }
+            })
+
+
+            if (memberMatch) {
+                memberMatch.increment(`messages`, {
+                    by: 1
+                })
+            }
+
+            else {
+                var memberMatch = await messages.create({
+                    user_id: message.author.id,
+					username: message.author.tag,
+                })
+            }
+        } catch (e) {
+            return console.log(e);
+        }
+    } 
+
     if (!message.content.startsWith(prefix) || message.author.bot || message.author.self || !client.commands.has(commandName)) return;
 
     const command = client.commands.get(commandName);
 
     if (command.modOnly) {
-        if (!message.member.roles.cache.some((role) => role.name == '🟢 Moderator')) {
+        if (!message.member.roles.cache.some((role) => role.id == '710239573698936904')) {
             return message.reply("This command is only available for moderators. You do not have the permissions to use it")
         }
     }
