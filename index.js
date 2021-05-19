@@ -203,12 +203,6 @@ for (const name in files) {
                                 return member.roles.add('751105762641576096').catch(console.error)
                             })
                         break;
-                    case '🟩':
-                        reaction.message.guild.members.fetch(user)
-                            .then((member) => {
-                                return member.roles.add('751105714700943420').catch(console.error)
-                            })
-                        break;
                     case '🔪':
                         reaction.message.guild.members.fetch(user)
                             .then((member) => {
@@ -216,26 +210,6 @@ for (const name in files) {
                             })
                         break;
                 }
-                break;
-            case rules_message:
-                if (reaction.emoji.name == '✅')
-                    reaction.message.guild.members.fetch(user)
-                    .then((member) => {
-                        member.roles.add('720763494139428994').catch(console.error).then(() => {
-
-                            var d = new Date();
-
-                            let readyEmbed = new Discord.MessageEmbed()
-                                .setTitle('**Member agreed to rules**')
-                                .setDescription(`**${member.user.tag}** agreed to the rules at ` + d + ". He is in the server since " + Math.round((d - member.joinedAt) / 1000) + " seconds")
-                                .setColor("7F0000")
-                                .setThumbnail(member.user.avatarURL())
-                                .setTimestamp()
-                                .setFooter(`${process.env.BOT_NAME} V${pjson.version}`, process.env.BOT_PFP);
-                            return client.channels.cache.get(process.env.SERVER_LOG_CHANNEL).send(readyEmbed);
-                        })
-                    })
-                break;
         }
     })
 
