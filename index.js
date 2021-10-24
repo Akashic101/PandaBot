@@ -133,6 +133,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         })
         .setFooter(`${process.env.BOT_NAME} V${pjson.version}`, process.env.BOT_PFP);
 
+        /*
     switch (reaction.emoji.name) {
         case '1️⃣':
             reportEmbed.addField('Rule', reaction.emoji.name, true)
@@ -165,6 +166,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
             client.channels.cache.get(process.env.OFFICE).send(reportEmbed);
             break;
     }
+    */
 
     switch (reaction.message.id) {
         case pronoun_message:
