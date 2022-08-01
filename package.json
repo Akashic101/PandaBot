@@ -19,7 +19,7 @@
   "dependencies": {
     "canvas": "^2.7.0",
     "chartjs-to-image": "^1.0.4",
-    "discord.js": "^12.5.3",
+    "discord.js": "^14.0.0",
     "dotenv": "^8.2.0",
     "reddit-simple": "^2.1.1",
     "require-all": "^3.0.0",
